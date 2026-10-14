@@ -1,4 +1,4 @@
-import { catById, categories, formatDate, locById, localities, updates, type Lang as _L } from "./data-lang";
+import { categories, formatDate, locById, localities, updates } from "./data";
 
 export function answer(q: string, lang: "en" | "te"): string {
   const s = q.toLowerCase();
@@ -52,4 +52,3 @@ export const examples = {
   en: ["Is there a water supply update in my area?", "How can I find the official government service website?", "Where can I check local road closure information?", "Explain this public notice in simple Telugu.", "What information should I check before attending a public meeting?"],
   te: ["నా ప్రాంతంలో నీటి సరఫరా సమాచారం ఉందా?", "అధికారిక ప్రభుత్వ సేవల వెబ్‌సైట్ ఎలా కనుగొనాలి?", "రోడ్డు మూసివేత సమాచారం ఎక్కడ చూడాలి?", "ఈ ప్రకటనను సరళమైన తెలుగులో వివరించండి.", "ప్రజా సమావేశానికి హాజరయ్యే ముందు ఏమి తనిఖీ చేయాలి?"],
 };
-export type { _L };
