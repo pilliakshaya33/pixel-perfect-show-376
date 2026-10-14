@@ -4,12 +4,12 @@ import { useLang } from "@/lib/i18n";
 import { categories, localities, updates, filterUpdates } from "@/lib/data";
 import { PageHeader, UpdateCard, inputCls, DemoLabel } from "@/components/site";
 
-type S = { q?: string; cat?: string; status?: string; loc?: string; sort?: "new" | "old" };
+type S = { q?: string | undefined; cat?: string | undefined; status?: string | undefined; loc?: string | undefined; sort?: "new" | "old" | undefined };
 const str = (v: unknown) => (typeof v === "string" && v ? v : undefined);
 
 export const Route = createFileRoute("/updates/")({
   validateSearch: (s: Record<string, unknown>): S => ({
-    q: str(s.q), cat: str(s.cat), status: str(s.status), loc: str(s.loc), sort: s.sort === "old" ? "old" : undefined,
+    q: str(s["q"]), cat: str(s["cat"]), status: str(s["status"]), loc: str(s["loc"]), sort: s["sort"] === "old" ? "old" : undefined,
   }),
   head: () => ({
     meta: [
@@ -78,7 +78,7 @@ function Dashboard() {
   );
 }
 
-function Sel({ label, value, onChange, opts, all }: { label: string; value?: string; onChange: (v?: string) => void; opts: string[][]; all: string }) {
+function Sel({ label, value, onChange, opts, all }: { label: string; value?: string | undefined; onChange: (v?: string) => void; opts: string[][]; all: string }) {
   return (
     <label className="text-xs font-semibold text-muted-foreground">{label}
       <select value={value ?? ""} onChange={(e) => onChange(e.target.value || undefined)} className={`${inputCls} mt-1 text-foreground`}>

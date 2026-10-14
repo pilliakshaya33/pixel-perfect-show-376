@@ -22,12 +22,12 @@ const empty = { cat: "", loc: "", desc: "", sugg: "" };
 function Feedback() {
   const { t, lang } = useLang();
   const [f, setF] = useState(empty);
-  const [err, setErr] = useState<Record<string, string>>({});
+  const [err, setErr] = useState<{ cat?: string; loc?: string; desc?: string }>({});
   const [done, setDone] = useState(false);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const er: Record<string, string> = {};
+    const er: { cat?: string; loc?: string; desc?: string } = {};
     if (!f.cat) er.cat = t("fb_req");
     if (!f.loc) er.loc = t("fb_req");
     if (!f.desc.trim()) er.desc = t("fb_req"); else if (f.desc.trim().length < 10) er.desc = t("fb_min");
@@ -75,7 +75,7 @@ function Feedback() {
   );
 }
 
-function Field({ id, label, err, req, children }: { id: string; label: string; err?: string; req?: boolean; children: React.ReactNode }) {
+function Field({ id, label, err, req, children }: { id: string; label: string; err?: string | undefined; req?: boolean; children: React.ReactNode }) {
   return (
     <div>
       <label htmlFor={id} className="mb-1.5 block text-sm font-semibold">{label}{req && <span className="text-destructive"> *</span>}</label>
