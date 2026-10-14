@@ -3,7 +3,7 @@ import { categories, formatDate, locById, localities, updates } from "./data";
 export function answer(q: string, lang: "en" | "te"): string {
   const s = q.toLowerCase();
   const te = lang === "te";
-  const loc = localities.find((l) => s.includes(l.name.en.split(",")[0].toLowerCase()) || s.includes(l.name.te.split(",")[0]) );
+  const loc = localities.find((l) => s.includes((l.name.en.split(",")[0] ?? "").toLowerCase()) || s.includes(l.name.te.split(",")[0] ?? "") );
   const city = ["guntur", "గుంటూరు"].some((w) => s.includes(w)) ? "guntur" : ["vijayawada", "విజయవాడ"].some((w) => s.includes(w)) ? "vja" : null;
   const kw: Record<string, string[]> = {
     water: ["water", "నీ"], roads: ["road", "traffic", "రోడ్", "ట్రాఫిక్"], garbage: ["garbage", "waste", "చెత్త"],
@@ -11,7 +11,7 @@ export function answer(q: string, lang: "en" | "te"): string {
     electricity: ["power", "electric", "current", "విద్యుత్", "కరెంట"], emergency: ["rain", "emergency", "వర్ష", "అత్యవసర"],
     development: ["development", "footpath", "అభివృద్ధి"],
   };
-  const cat = categories.find((c) => kw[c.id].some((k) => s.includes(k)));
+  const cat = categories.find((c) => (kw[c.id] ?? []).some((k) => s.includes(k)));
 
   if (/(website|portal|official|link|వెబ్‌సైట్|అధికారిక)/.test(s)) {
     return te

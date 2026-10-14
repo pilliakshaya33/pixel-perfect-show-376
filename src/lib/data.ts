@@ -87,7 +87,7 @@ export const updates: Update[] = [
     body: { en: "Sample notice: Residents are invited to suggest priorities for next year's ward-level works such as streetlights, parks and drains.", te: "నమూనా ప్రకటన: వీధి దీపాలు, పార్కులు, కాలువలు వంటి వచ్చే ఏడాది వార్డు పనుల ప్రాధాన్యతలను సూచించడానికి నివాసితులకు ఆహ్వానం." } },
 ];
 
-export function filterUpdates(list: Update[], o: { q?: string; cat?: string; status?: string; loc?: string; sort?: "new" | "old" }) {
+export function filterUpdates(list: Update[], o: { q?: string | undefined; cat?: string | undefined; status?: string | undefined; loc?: string | undefined; sort?: "new" | "old" | undefined }) {
   const q = (o.q ?? "").trim().toLowerCase();
   return list
     .filter((u) => !o.cat || u.category === o.cat)
